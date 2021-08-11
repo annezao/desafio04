@@ -5,7 +5,7 @@ class User {
   name: string;
   admin: boolean;
   email: string;
-  create_at: Date;
+  created_at: Date;
   updated_at: Date;
 
   constructor() {
