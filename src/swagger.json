@@ -1,0 +1,102 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio 04 - Introdução SOLID",
+        "description": "Documentação da aplicação produzida para exercício do uso do padrão SOLID usando Typescript",
+        "version": "1.0.0",
+        "contact": {
+            "email": "ariannemacena@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a user",
+                "description": "Create a user given a email and a name.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "gustavoanthonycastro@email.com",
+                                    "name": "Gustavo Anthony Castro"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created.",
+                        //https://swagger.io/docs/specification/links/
+                        "links": {
+                            "getUserId": {
+                                "operationId":
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User already exists."
+                    }
+                }
+            },
+            "get": {
+                "tags": ["User"],
+                "summary": "List users",
+                "description": "Return a list of all users given a valid user_id passed by header value.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "header",
+                        "description": "Valid user id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "example": {
+                                            "email": "gustavoanthonycastro@email.com",
+                                            "name": "Gustavo Anthony Castro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Access forbidden."
+                    }
+                }
+            }
+        }
+    }
+}
