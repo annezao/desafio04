@@ -37,13 +37,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Created.",
-                        //https://swagger.io/docs/specification/links/
-                        "links": {
-                            "getUserId": {
-                                "operationId":
-                            }
-                        }
+                        "description": "Created."
                     },
                     "400": {
                         "description": "User already exists."
@@ -76,16 +70,35 @@
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "email": {
-                                                "type": "string"
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
                                             },
                                             "name": {
                                                 "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date"
                                             }
                                         },
                                         "example": {
+                                            "id": "305cbc03-8f96-434a-ba6d-ca564e3658fe",
+                                            "name": "Gustavo Anthony Castro",
+                                            "admin": false,
                                             "email": "gustavoanthonycastro@email.com",
-                                            "name": "Gustavo Anthony Castro"
+                                            "created_at": "2021-07-07T01:23:41.868Z",
+                                            "updated_at": "2021-07-07T01:23:41.868Z"
                                         }
                                     }
                                 }
@@ -94,6 +107,136 @@
                     },
                     "400": {
                         "description": "Access forbidden."
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin": {
+            "patch": {
+                "tags": ["User"],
+                "summary": "Turn an user in an admin",
+                "description": "Turn an user in an admin given user_id.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Valid user id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        }
+                                    },
+                                    "example": {
+                                        "id": "305cbc03-8f96-434a-ba6d-ca564e3658fe",
+                                        "name": "Gustavo Anthony Castro",
+                                        "admin": true,
+                                        "email": "gustavoanthonycastro@email.com",
+                                        "created_at": "2021-07-07T01:23:41.868Z",
+                                        "updated_at": "2021-07-07T01:23:41.868Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get an user data",
+                "description": "Get an user data given user_id.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Valid user id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        }
+                                    },
+                                    "example": {
+                                        "id": "305cbc03-8f96-434a-ba6d-ca564e3658fe",
+                                        "name": "Gustavo Anthony Castro",
+                                        "admin": false,
+                                        "email": "gustavoanthonycastro@email.com",
+                                        "created_at": "2021-07-07T01:23:41.868Z",
+                                        "updated_at": "2021-07-07T01:23:41.868Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found."
                     }
                 }
             }
